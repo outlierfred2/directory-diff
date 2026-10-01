@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Directory Diff</title><meta name="description" content="Compare two directories and download a complete file diff report.">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<header><a class="brand" href="./"><span class="logo" aria-hidden="true">±</span> Directory Diff</a><span class="local">Local comparison</span></header>
+<main>
+  <section class="setup" aria-label="Directories">
+    <div class="picker"><div class="picker-heading"><span class="eyebrow">01</span><h1>Input</h1></div><label class="folder-button" for="input-folder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3Z"/></svg><span id="input-name">Select directory</span><span class="select-label">Browse</span><input id="input-folder" type="file" webkitdirectory multiple></label><span id="input-count" class="folder-count">No files selected</span></div>
+    <div class="picker"><div class="picker-heading"><span class="eyebrow">02</span><h1>Golden</h1></div><label class="folder-button" for="golden-folder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10H3Z"/></svg><span id="golden-name">Select directory</span><span class="select-label">Browse</span><input id="golden-folder" type="file" webkitdirectory multiple></label><span id="golden-count" class="folder-count">No files selected</span></div>
+    <div class="run"><button id="compare" class="primary" disabled>Compare directories</button><button id="cancel" hidden>Cancel</button><span id="progress" role="status" aria-live="polite"></span></div>
+  </section>
+  <p id="error" role="alert" hidden></p>
+  <section id="empty" class="empty"><span class="empty-symbol" aria-hidden="true">− / +</span><h2>Select two directories to compare</h2></section>
+  <section id="report" hidden aria-label="Diff report">
+    <div class="report-top"><div><h2>Diff report</h2><p id="report-roots"></p></div><button id="download">Download report</button></div>
+    <div id="stats" class="stats"></div>
+    <div class="workspace">
+      <aside aria-label="Files"><div class="file-controls"><input id="search" type="search" placeholder="Search files" aria-label="Search files"><select id="filter" aria-label="Filter files"><option value="changed">Changed files</option><option value="all">All files</option><option value="modified">Modified</option><option value="added">Added</option><option value="removed">Removed</option><option value="unchanged">Unchanged</option><option value="error">Errors</option></select></div><div id="file-list"></div></aside>
+      <section class="detail" aria-label="File diff"><div class="detail-top"><div><span id="file-status" class="badge"></span><h3 id="file-path"></h3></div><label class="context-toggle"><input id="all-lines" type="checkbox"> All lines</label></div><div class="diff-labels"><span>− Input</span><span>+ Golden</span></div><div id="diff-body"></div><button id="more" hidden>Show more lines</button></section>
+    </div>
+  </section>
+</main>
+</body>
+</html>
